@@ -210,10 +210,11 @@ void convertCMD(void) // Body for commend conversion function
     const char *customCommend[] = {"factorial", "mul", "add" , "strrev"}; // User-defined commands 
 
     int isCustomCommend = 0;    
+    int sizeofCustomCommend = sizeof(customCommend) / sizeof(customCommend[0]) ;
 
     if (commend != NULL) {
         // Check if the commend is in the customCommend array
-        for (int j = 0; j < 4; j++) {
+        for (int j = 0; j < sizeofCustomCommend ; j++) {
             if (strcmp(customCommend[j], commend) == 0) {
                 isCustomCommend = 1; // if commend matches with a custom commend
                 break;

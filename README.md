@@ -1,6 +1,7 @@
 # Custom Shell Implementation
 
-This is a simple shell implementation in C created as part of an assignment. The shell supports basic commends like `cd`, `help`, input/output redirection, and some custom commends (`add`, `mul`, `factorial`) that are executed from user-defined executable files.
+This is a simple shell implementation in C created as part of an assignment. The shell supports basic commends like `cd`, `help`, input/output redirection, and some custom commends (`add`, `mul`, `factorial`,`strrev` etc.. ) that are executed from user-defined executable files.
+N.B : To execute any user defined command you need to keep command.c file in a subdirectory named 'ExecutableFiles' and add the program name at customCommend[] character array of convertCMD() function 
 
 ---
 
@@ -82,4 +83,4 @@ This is a simple shell implementation in C created as part of an assignment. The
 
 ## Visualization of Process Tree
 
-<img src="images/processtree.png" alt="Processtree where Child Process is created" width="400">
+<img src="https://github.com/gkdey17cse/SPAssignment1/blob/main/images/processtree.png" alt="Processtree where Child Process is created" width="800">
