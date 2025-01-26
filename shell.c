@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<string.h>
 #include<unistd.h>
-// #include<sys/types.h>
+#include<sys/types.h>
 #include<sys/wait.h>
 #include<fcntl.h>  // For file control operations
 
@@ -19,7 +19,7 @@ int handleInputRedirection(void);  // Function for input redirection
 int main(void) {
     // pid_t ppid = getppid();
     // pid_t pid = getpid();
-    //printf("The Current Process ID is : %d and CUrrent Parent Process ID is : %d\n",pid,ppid);
+    // printf("The Current Process ID is : %d and CUrrent Parent Process ID is : %d\n",pid,ppid);
     while (1) {
         getUserCommand();
 
@@ -43,21 +43,22 @@ int main(void) {
             continue;
         }
 
-        pid_t pid = fork();
-        if (pid < 0) {
+        int pidStat = fork();
+        if (pidStat < 0) {
             perror("Fork failed!....\n");
             exit(1);
         }       
 
-        if (pid == 0) {  // Child process
+        if (pidStat == 0) {  // Child process
             handleInputRedirection();  // Handle input redirection
             handleOutputRedirection();  // Redirect output in the child
             // ppid = getppid();
             // pid = getpid();
-            //printf("The Current Process ID is : %d and CUrrent Parent Process ID is : %d\n",pid,ppid);
-            //sleep(300);
+            // printf("The Current Process ID is : %d and CUrrent Parent Process ID is : %d\n",pid,ppid);
+            sleep(300);
 
             execvp(argv[0], argv);  
+            printf("Successful");
             perror("execvp failed!.....\n");  
             exit(1);
         } else {
@@ -73,12 +74,12 @@ int main(void) {
 
 void handleHelp(void) {
     char *args[] = {"man", "bash", NULL};  // "man bash" will do the job of help command 
-    pid_t pid = fork();
-    if (pid == 0) {
+    int pidStat = fork();
+    if (pidStat == 0) {
         execvp("man", args);
         perror("execvp failed");
         exit(1);
-    } else if (pid > 0) {
+    } else if (pidStat > 0) {
         wait(NULL);
     } else {
         perror("Fork failed");
