@@ -27,7 +27,7 @@ int main(void)
 
         if (strcmp("", cmd) == 0)
         {
-            
+
             continue; // overlook blank commend
         }
         if (strcmp("exit", cmd) == 0 || strcmp("clear", cmd) == 0)
@@ -84,8 +84,8 @@ int main(void)
 
 void cdHandeler(void) // Body for CD commend hanlder
 {
-    char *dir = argv[1];  // Will take directory path from the argument list
-    if (dir == NULL)    // In case of no directory specified will fectch the HOME directory using getenv ()
+    char *dir = argv[1]; // Will take directory path from the argument list
+    if (dir == NULL)     // In case of no directory specified will fectch the HOME directory using getenv ()
     {
         dir = getenv("HOME");
         if (dir == NULL)
@@ -95,7 +95,7 @@ void cdHandeler(void) // Body for CD commend hanlder
         }
     }
 
-    if (chdir(dir) == -1)   // In case of failore
+    if (chdir(dir) == -1) // In case of failore
     {
         perror("CD commend failed!.....\n");
     }
@@ -105,7 +105,7 @@ void helpHandeler(void) // Body for HELP commend hanlder
 {
     char *args[] = {"man", "bash", NULL}; // "man bash" will do the job of help commend
     pid_t pid = fork();
-    if (pid == 0)    // create child
+    if (pid == 0) // create child
     {
         execvp("man", args);
         perror("execvp commend failed!...\n");
@@ -206,16 +206,19 @@ int intputRedirectHandel(void) // Body for INPUT redirect hanlder : will redirec
 
 void convertCMD(void) // Body for commend conversion function
 {
-    char *commend = strtok(cmd, " "); // generate tokens based on space
-    const char *customCommend[] = {"factorial", "mul", "add" , "strrev"}; // User-defined commands 
+    char *commend = strtok(cmd, " ");                                    // generate tokens based on space
+    const char *customCommend[] = {"factorial", "mul", "add", "strrev"}; // User-defined commands
 
-    int isCustomCommend = 0;    
-    int sizeofCustomCommend = sizeof(customCommend) / sizeof(customCommend[0]) ;
+    int isCustomCommend = 0;
+    int sizeofCustomCommend = sizeof(customCommend) / sizeof(customCommend[0]);
 
-    if (commend != NULL) {
+    if (commend != NULL)
+    {
         // Check if the commend is in the customCommend array
-        for (int j = 0; j < sizeofCustomCommend ; j++) {
-            if (strcmp(customCommend[j], commend) == 0) {
+        for (int j = 0; j < sizeofCustomCommend; j++)
+        {
+            if (strcmp(customCommend[j], commend) == 0)
+            {
                 isCustomCommend = 1; // if commend matches with a custom commend
                 break;
             }
@@ -245,11 +248,11 @@ void convertCMD(void) // Body for commend conversion function
     }
 }
 
-void getUsorCommend(void)   // Body of User input function
+void getUsorCommend(void) // Body of User input function
 {
-    printf("GRS/Assignment/Assignment1$ ");     // SHell view
-    fgets(cmd, 256, stdin);        
-    if ((strlen(cmd) > 0) && (cmd[strlen(cmd) - 1] == '\n'))  
+    printf("GRS/Assignment/Assignment1$ "); // SHell view
+    fgets(cmd, 256, stdin);
+    if ((strlen(cmd) > 0) && (cmd[strlen(cmd) - 1] == '\n'))
     {
         cmd[strlen(cmd) - 1] = '\0'; // will remove newlines
     }
