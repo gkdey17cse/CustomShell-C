@@ -5,7 +5,7 @@ int main(int argc, char *argv[]) {
     int a, b;
 
     if (argc == 1) {
-        if (scanf("%d %d", &a, &b) != 2) {  // Read two integers from stdin/input redirection
+        if (scanf("%d %d", &a, &b) != 2) {  // will read two integers from stdin/input redirection
             fprintf(stderr, "Required two integers.\n");
             return 1;
         }
